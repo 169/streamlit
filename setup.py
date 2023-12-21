@@ -154,9 +154,7 @@ setuptools.setup(
     # PEP 561: https://mypy.readthedocs.io/en/stable/installed_packages.html
     package_data={"streamlit": ["py.typed", "hello/**/*.py"]},
     package_dir = {"": "lib"},
-    packages=[
-        'streamlit',
-    ],
+    packages=setuptools.find_packages("lib", exclude=["tests", "tests.*"]),
     # Requirements
     install_requires=INSTALL_REQUIRES,
     extras_require=EXTRA_REQUIRES,
