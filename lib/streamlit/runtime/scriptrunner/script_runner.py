@@ -605,9 +605,16 @@ class ScriptRunner:
         # even if we were stopped with an exception.)
         self.on_event.send(self, event=event)
 
-        # Remove orphaned files now that the script has run and files in use
+        # Origin: Remove orphaned files now that the script has run and files in use
         # are marked as active.
-        runtime.get_instance().media_file_mgr.remove_orphaned_files()
+
+        # Now: The video component may be under the if judgment condition, which will trigger
+        # the rerun script behavior, thereby deleting the file object just created before,
+        # so do not delete the orphaned files here. However, this may cause the memory usage
+        # to increase after long-term use. It is recommended to restart the service regularly.
+        #
+        # Todo: Fix this issue
+        # runtime.get_instance().media_file_mgr.remove_orphaned_files()
 
         # Force garbage collection to run, to help avoid memory use building up
         # This is usually not an issue, but sometimes GC takes time to kick in and
