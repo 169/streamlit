@@ -153,8 +153,10 @@ setuptools.setup(
     python_requires=">=3.8, !=3.9.7",
     # PEP 561: https://mypy.readthedocs.io/en/stable/installed_packages.html
     package_data={"streamlit": ["py.typed", "hello/**/*.py"]},
-    packages=setuptools.find_packages("lib", exclude=["tests", "tests.*"]),
-    package_dir = {"streamlit": "lib/streamlit"},
+    package_dir = {"": "lib"},
+    packages=[
+        'streamlit',
+    ],
     # Requirements
     install_requires=INSTALL_REQUIRES,
     extras_require=EXTRA_REQUIRES,
